@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+import os
 
 # Function to load IIP data
 def load_iip_data():
@@ -18,18 +19,13 @@ def load_stock_data(stock_symbol):
 def main():
     st.title("Data Comparison App")
 
+    # Move selection options to the left side
+    col1, col2 = st.beta_columns(2)
+
     # Load IIP data
-    iip_data = load_iip_data()
-
-    # Load stock symbols
-    stock_symbols = ["AAPL", "GOOGL", "MSFT"]  # Add more stock symbols as needed
-
-    # User selects IIP or Stock Data
-    data_option = st.radio("Select Data Type:", ["IIP Data", "Stock Data"])
-
-    if data_option == "IIP Data":
-        # Show IIP Data
+    with col1:
         st.subheader("IIP Data")
+        iip_data = load_iip_data()
         st.dataframe(iip_data)
 
         # User selects industry for comparison
@@ -46,7 +42,14 @@ def main():
         plt.legend()
         st.pyplot(plt)
 
-    elif data_option == "Stock Data":
+    # Load stock symbols from the Stock_Data folder
+    stock_folder_path = 'Stock_Data'  # Replace with the actual path
+    stock_symbols = [file.split('.')[0] for file in os.listdir(stock_folder_path) if file.endswith('.xlsx')]
+
+    # User selects Stock Data
+    with col2:
+        st.subheader("Stock Data")
+
         # User selects stock symbol
         selected_stock = st.selectbox("Select Stock Symbol:", stock_symbols)
 
@@ -54,7 +57,6 @@ def main():
         stock_data = load_stock_data(selected_stock)
 
         # Show Stock Data
-        st.subheader(f"Stock Data for {selected_stock}")
         st.dataframe(stock_data)
 
         # Plot time series comparison graph
