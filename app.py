@@ -4,13 +4,13 @@ import matplotlib.pyplot as plt
 
 # Function to load IIP data
 def load_iip_data():
-    iip_file_path = 'path/to/IIP_Data.xlsx'  # Replace with the actual path
+    iip_file_path = 'IIP_Data.xlsx'  # Replace with the actual path
     iip_data = pd.read_excel(iip_file_path)
     return iip_data
 
 # Function to load stock data
 def load_stock_data(stock_symbol):
-    stock_file_path = f'path/to/Stock_Data/{stock_symbol}.xlsx'  # Replace with the actual path
+    stock_file_path = f'Stock_Data/{stock_symbol}.xlsx'  # Replace with the actual path
     stock_data = pd.read_excel(stock_file_path)
     return stock_data
 
