@@ -12,7 +12,7 @@ def load_iip_data():
 # Function to load stock data
 def load_stock_data(stock_symbol):
     stock_file_path = f'Stock_Data/{stock_symbol}.xlsx'  # Replace with the actual path
-    stock_data = pd.read_excel(stock_file_path)
+    stock_data = pd.read_excel(stock_file_path, engine='openpyxl')
     return stock_data
 
 # Streamlit app
@@ -32,8 +32,8 @@ def main():
         industry_options = iip_data.columns[2:]
         selected_industry = st.selectbox("Select Industry for Comparison:", industry_options)
 
-        # Plot time series comparison graph
-        st.subheader(f"Time Series Comparison for {selected_industry}")
+        # Plot time series comparison graph for IIP data
+        st.subheader(f"IIP Time Series Comparison for {selected_industry}")
         plt.figure(figsize=(10, 6))
         plt.plot(iip_data["Date"], iip_data[selected_industry], label=f"{selected_industry} (IIP)")
         plt.xlabel("Date")
@@ -59,8 +59,8 @@ def main():
         # Show Stock Data
         st.dataframe(stock_data)
 
-        # Plot time series comparison graph
-        st.subheader(f"Time Series Comparison for {selected_stock}")
+        # Plot time series comparison graph for stock data
+        st.subheader(f"Stock Time Series Comparison for {selected_stock}")
         plt.figure(figsize=(10, 6))
         plt.plot(stock_data["Date"], stock_data["Adj Close"], label=f"{selected_stock} (Stock)")
         plt.xlabel("Date")
