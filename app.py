@@ -5,7 +5,7 @@ import os
 
 # Function to load IIP data
 def load_iip_data():
-    iip_file_path = 'IIP_Data.xlsx'  # Replace with the actual path
+    iip_file_path = 'IP_Data.xlsx'  # Replace with the actual path
     iip_data = pd.read_excel(iip_file_path)
     return iip_data
 
@@ -20,7 +20,7 @@ def main():
     st.title("Data Comparison App")
 
     # Move selection options to the left side
-    col1, col2 = st.beta_columns(2)
+    col1, col2 = st.columns(2)
 
     # Load IIP data
     with col1:
